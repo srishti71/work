@@ -1,0 +1,21 @@
+ fun minOperations(nums: IntArray, k: Int): Int {
+         var result = 0
+
+        val pq = PriorityQueue<Int>(){a:Int,b: Int -> a-b}
+
+        for(ele in nums) pq.add(ele)
+
+        while(pq.isNotEmpty()) {
+            val first = if(pq.peek() < k) pq.poll() else Integer.MAX_VALUE
+            if(pq.isEmpty()) break
+            val second = if(pq.peek() < k) pq.poll() else Integer.MAX_VALUE
+
+            if(first ==  Integer.MAX_VALUE || second =  Integer.MAX_VALUE) break
+
+            val sum = first * 2 + second
+            if(sum >= k) break
+            else pq.add(sum)
+            result++
+        }
+        return result
+    }
